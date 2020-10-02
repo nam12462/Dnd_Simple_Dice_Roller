@@ -21,9 +21,9 @@ public class DiceRoll {
 	}
 	
 	System.out.println("Modifiers: ");
-	int m = scan.nextInt();
+	int mod = scan.nextInt();
 	
-	R1.D(nRoll, nSide, m);		
+	R1.D(nRoll, nSide, mod); //Calls the function in the Dice Method		
 	}
 
 }
