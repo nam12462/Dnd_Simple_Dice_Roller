@@ -1,0 +1,5 @@
+The code placed in this file is my attempt at creating a dice roller 
+in Java. Dice is the method class and DiceRoll is the execution file,
+which takes user input to produce the results. This is still a work in
+progress as the next step is to loop the entire application until specified
+to end.
