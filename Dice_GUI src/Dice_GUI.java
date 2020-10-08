@@ -4,14 +4,14 @@ import java.util.Arrays;
 import javax.swing.*;
 
 public class Dice_GUI extends JFrame implements ActionListener{
-	int MinValue = 1;
-	int MaxValue = 0;
-	int RollStart = 0;
-	int sum = 0;
-	int Mod = 0;
+	int MinValue = 1; //Minimum roll value cannot be less than 1
+	int MaxValue = 0; //Max value will be set by the user.
+	int RollStart = 0; //Used to determine how many rolls the user wants.
+	int sum = 0; //The total value of all the rolls made.
+	int Mod = 0; //The modifier value the user sets.
 	int integer;
 	private static final int [] Dice_Sides = {3,4,6,8,10,12,20,100};
-	int[] storage;
+	int[] storage; //Used to store where the rolls are made.
 	
 	private TextField RollCount;
 	private TextField Modifier;
@@ -127,10 +127,30 @@ public class Dice_GUI extends JFrame implements ActionListener{
 		PastResultArea.append("Rolls: " + text + " Sum: " +  num + "\n");
 	}
 	
-
-	public void error() {
+	//Checks to see if no input was provided by the user
+	//otherwise the program will operate.
+	public void check_input(){
+		if(RollCount.getText().isEmpty()) {
+			error();
+			return;
+		}
+	}
+	
+	//Clears all the fields.
+	public void clear_input(){
+		MaxValue = 0;
+		sum = 0;
+		RollCount.setText("");
+		Modifier.setText("");
+		BGroup.clearSelection();
+		resultField.setText("");
+		Total.setText("");
+		PastResultArea.setText("");
+	}
+	
 	//Throw an error in the cases where no input is provide,
-	//Therefore a roll could not have been made.		
+	//Therefore a roll could not have been made.	
+	public void error() {
 		resultField.setText("No Roll Was Made! Try Again");
 	}
 	
@@ -156,47 +176,34 @@ public class Dice_GUI extends JFrame implements ActionListener{
 		if(arg.equals("Roll")) {
 			//Checks to see if user provided anything other than an 
 			//integer to the input fields
-			try {
-				integer = Integer.parseInt(RollCount.getText());
+			try {integer = Integer.parseInt(RollCount.getText());
 			}catch (NumberFormatException error) {
 				notInt();
 				return;
 			}
-			try {
-				integer = Integer.parseInt(Modifier.getText());
+			try {integer = Integer.parseInt(Modifier.getText());
 			}catch (NumberFormatException error) {
 				notInt();
 				return;
 			}
+			//Tried to move the input checker into it's own method,
+			//but numberformatexception error will be thrown when
+			//it is move out of this function. 
 			
-			//Checks to see if no input was provided by the user
-			//otherwise the program will operate.
-			if(RollCount.getText().isEmpty()) {
-				error();
-				return;
-			}else{
-				RollStart=Integer.parseInt(RollCount.getText());
-				if(Modifier.getText().isEmpty()) {Mod = 0;}
-				else {Mod=Integer.parseInt(Modifier.getText());}
-				Dice_Roll(RollStart,MaxValue);
-				result();
-				sum=0;
+			check_input();
+			RollStart=Integer.parseInt(RollCount.getText());
+			if(Modifier.getText().isEmpty()) {Mod = 0;}
+			else {Mod=Integer.parseInt(Modifier.getText());}
+			Dice_Roll(RollStart,MaxValue);
+			result();
+			sum=0;
 			}
-			
-		//Clears all the fields.	
+				
 		}else if(arg.equals("Clear")) {
-			MaxValue = 0;
-			sum = 0;
-			RollCount.setText("");
-			Modifier.setText("");
-			BGroup.clearSelection();
-			resultField.setText("");
-			Total.setText("");
-			PastResultArea.setText("");
+			clear_input();
 		}else if(arg.equals("Exit")) {
 			System.exit(0);
 		}
-		
 	}
 
 
