@@ -205,7 +205,4 @@ public class Dice_GUI extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 	}
-
-
-
 }
