@@ -1,0 +1,13 @@
+A DnD dice roller GUI that is writen in Java that 
+takes user input then produces results and displays
+past results.
+
+The part that stumped me the longest was trying
+to figure out how to implement the action performed 
+on the radio button. I kept thinking that the if a 
+certain radio button was pressed I would have to iterate
+through the array to find what value that is pressed. 
+But I eventually figured out that I would take the value
+from the array convert it into a string then evaluate it
+to determine what value was pressed to determine what 
+the max value would be set as.
